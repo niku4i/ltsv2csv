@@ -7,7 +7,7 @@ options = {}
 options[:col_sep] = "\t"
 OptionParser.new do |opt|
   opt.on('-k [KEYS]', 'Keys to output (multiple keys separated by ,)') {|v| options[:keys] = v.split(/\s*,\s*/) }
-  opt.on('-c [SEPARATOR]', 'Colum separator of csv (defaut: "\t")') {|v| options[:col_sep] = v }
+  opt.on('-c [SEPARATOR]', 'Column separator of csv (defaut: "\t")') {|v| options[:col_sep] = v }
   opt.parse!(ARGV)
 end
 
