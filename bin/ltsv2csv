@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+require 'csv'
+require 'optparse'
+
+options = {}
+# default value
+options[:col_sep] = "\t"
+OptionParser.new do |opt|
+  opt.on('-k [KEYS]', 'Keys to output (multiple keys separated by ,)') {|v| options[:keys] = v.split(/\s*,\s*/) }
+  opt.on('-c [SEPARATOR]', 'Colum separator of csv (defaut: "\t")') {|v| options[:col_sep] = v }
+  opt.parse!(ARGV)
+end
+
+target_keys = []
+$stdin.each_with_index do |line, i|
+  line.chomp!
+  record = Hash[line.split("\t").map{|f| f.split(":", 2)}]
+  if i == 0
+    if options[:keys]
+      target_keys = options[:keys] & record.keys
+    else
+      target_keys = record.keys.sort
+    end
+    puts CSV.generate_line(target_keys, col_sep: options[:col_sep])
+  end
+  puts CSV.generate_line(record.values_at(*target_keys), col_sep: options[:col_sep])
+end
