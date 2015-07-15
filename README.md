@@ -1,6 +1,6 @@
 # ltsv2csv
 
-Convert LTSV (Labeled Tab Separated Values) to CSV
+Convert LTSV (Labeled Tab Separated Values) to CSV (or TSV)
 
 ## Installation
 
@@ -10,7 +10,7 @@ Convert LTSV (Labeled Tab Separated Values) to CSV
 
 ## Usage
 
-`ltsv2csv` is a command line tool. It converts stdin LTSV lines to stdout CSV. The first row of output become a header row of CSV.
+`ltsv2csv` is a command line tool. It converts stdin LTSV lines to stdout CSV(TSV). The first row of output become a header row.
 
 ### Example 1
 
@@ -38,6 +38,20 @@ baz     bar
 666     555
 999     888
 ```
+
+### Example 3
+
+Default column separator is TAB. By `-c` option, it can be changed.
+
+```
+$ cat input.ltsv | ltsv2csv -k baz,bar -c ,
+baz,bar
+333,222
+666,555
+999,888
+```
+
+
 
 ## Contributing
 
